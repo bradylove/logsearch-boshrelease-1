@@ -57,9 +57,9 @@ curl -X PUT -s localhost:9200/_all/_settings \
 <% end %>
 
 <% if_p('elasticsearch.cloud.repository') do %>
-  REP=`curl -s localhost:9200/_snapshot/<%= p("elasticsearch.cloud.repository") %> | grep <%= p("elasticsearch.cloud.aws.bucket") %> | wc -l`
+  REP=`curl -s localhost:9200/_snapshot/<%= p('elasticsearch.cloud.repository') %> | grep <%= p('elasticsearch.cloud.aws.bucket') %> | wc -l`
   if [ $REP == 0 ]; then
-    curl -XPUT localhost:9200/_snapshot/<%= p("elasticsearch.cloud.repository") %> -d '{"type": "s3", "settings": {"bucket": "<%= p("elasticsearch.cloud.aws.bucket") %>"}}'
+    curl -XPUT localhost:9200/_snapshot/<%= p('elasticsearch.cloud.repository') %> -d '{"type": "s3", "settings": {"bucket": "<%= p('elasticsearch.cloud.aws.bucket') %>"}}'
   fi
 <% end %>
 
